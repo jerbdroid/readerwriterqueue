@@ -1,0 +1,50 @@
+# load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake")
+
+# package(default_visibility = ["//visibility:public"])
+
+# filegroup(
+#     name = "all_srcs",
+#     srcs = glob(["**"]),
+#     visibility = ["//visibility:public"],
+# )
+
+# config_setting(
+#     name = "opt_build",
+#     values = {"compilation_mode": "opt"},
+# )
+
+# config_setting(
+#     name = "dbg_build",
+#     values = {"compilation_mode": "dbg"},
+# )
+
+# config_setting(
+#     name = "fast_build",
+#     values = {"compilation_mode": "fastbuild"},
+# )
+
+# cmake(
+#     name = "readerwriterqueue",
+#     cache_entries = {
+#         # "CMAKE_C_FLAGS": "-Wno-error -Wno-unsafe-buffer-usage -Wno-newline-eof -Wno-builtin-macro-redefined -Wno-unreachable-code-break -Wno-deprecated -Wno-switch-default -Wno-shorten-64-to-32",
+#         # "CMAKE_CXX_FLAGS": "-Wno-error -Wno-unsafe-buffer-usage -Wno-newline-eof -Wno-builtin-macro-redefined -Wno-unreachable-code-break -Wno-deprecated -Wno-switch-default -Wno-shorten-64-to-32",
+#     },
+#     lib_source = ":all_srcs",
+#     out_static_libs = select({
+#         ":opt_build": [
+#         ],
+#         ":fast_build": [
+#         ],
+#         ":dbg_build": [
+#         ],
+#     }),
+# )
+
+cc_library(
+    name = "readerwriterqueue",
+    hdrs = glob([
+        "*.h",
+    ]),
+    # includes = ["./include/"],
+    visibility = ["//visibility:public"],
+)
